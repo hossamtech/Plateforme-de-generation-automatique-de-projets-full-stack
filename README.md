@@ -28,18 +28,16 @@ Cette plateforme permet de **générer automatiquement des projets full-stack** 
       <td><img src="/screenschot_app/sign-up.jpg" alt="Sign Up" width="300"></td>
     </tr>
     <tr>
-  <td><b>Home</b></td>
-  <td>
-    L'interface principale contient :
-    <ul>
-      <li><b>Sidebar : Éditeur de Code Intégré</b> – Permet de définir les tables, relations, et entités via un éditeur de code interactif avec mise à jour en temps réel.</li>
-      <li><b>Sidetools : Outils UX</b> – Inclut les fonctionnalités de configuration de base de données, gestion des projets (sauvegarde, partage, génération) et accès à l'historique.</li>
-      <li><b>Canvas : Génération UML</b> – Affiche un diagramme UML interactif généré dynamiquement à partir du code.</li>
-    </ul>
-  </td>
-  <td><img src="/screenschot_app/home.jpg" alt="Home" width="300"></td>
-</tr>
-
+      <td><b>Home</b></td>
+      <td>
+        L'interface principale offre un espace centralisé pour gérer les projets. Elle comprend une 
+        <b>sidebar</b> avec un éditeur de code intégré permettant de définir les tables et relations 
+        nécessaires, ainsi qu'une zone d'outils UX pour sauvegarder, partager et générer des projets. 
+        Un <b>canvas interactif</b> affiche dynamiquement un diagramme UML généré à partir du code, 
+        offrant une visualisation claire des entités et relations définies par l'utilisateur.
+      </td>
+      <td><img src="/screenschot_app/home.jpg" alt="Home" width="300"></td>
+    </tr>
     <tr>
       <td><b>Share Link</b></td>
       <td>Partager des liens vers des projets ou des diagrammes UML avec d'autres utilisateurs.</td>
