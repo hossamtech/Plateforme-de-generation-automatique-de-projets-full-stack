@@ -1,0 +1,102 @@
+<div class="col-span-12 md:order-8 2xl:col-span-9 card">
+  <div class="card-body">
+    <div class="grid items-center grid-cols-1 gap-3 mb-5 xl:grid-cols-12">
+      <div class="xl:col-span-3">
+        <h6 class="text-15 text-slate-600 font-medium">Manage Equipe</h6>
+      </div><!--end col-->
+      <div class="xl:col-span-4 xl:col-start-10">
+        <div class="flex justify-end gap-3">
+          <button type="button" [appModalTrigger]="'equipeModal'" class="text-custom-500 btn bg-custom-100 hover:text-white hover:bg-custom-600 focus:text-white focus:bg-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:ring active:ring-custom-100">
+            {{ selectedEquipe? 'Edit Equipe' : 'Add Equipe' }}
+          </button>
+        </div>
+      </div>
+    </div><!--end grid-->
+    <div class="-mx-5 overflow-x-auto">
+      <table class="w-full whitespace-nowrap">
+        <thead class="bg-slate-100 text-slate-500">
+          <tr>
+            <th class="text-left px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200">Idequipe</th>
+            <th class="text-left px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200">Nomequipe</th>
+            <th class="text-left px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200">Pays</th>
+            <th class="text-left px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of equipeList()">
+            <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200">{{ item.idequipe }}</td>
+            <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200">{{ item.nomequipe }}</td>
+            <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200">{{ item.pays }}</td>
+            <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 ">
+              <div class="flex gap-2 ">
+                  <a [appModalTrigger]="'equipeModal'" (click)="onEdit(item)" class="flex items-center justify-center size-8 transition-all duration-200 ease-linear rounded-md bg-slate-100  text-slate-500 hover:text-custom-500  hover:bg-custom-100">
+                      <lucide-angular name="pencil" [class]="'size-4'"></lucide-angular>
+                  </a>
+                  <a (click)="onEdit(item)" class="flex items-center justify-center size-8 transition-all duration-200 ease-linear rounded-md bg-slate-100  text-slate-500 hover:text-red-500  hover:bg-red-100">
+                      <lucide-angular name="trash-2" [class]="'size-4'"></lucide-angular>
+                  </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!--end table-->
+  </div><!--end card-body-->
+</div><!--end card-->
+<ng-modals id="equipeModal" [placement]="'modal-center'" className="fixed flex flex-col transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4">
+  <div class="w-[93vw] md:w-[32rem] bg-white shadow rounded-md">
+    <div class="flex items-center justify-between p-5 border-b">
+      <h5 class="text-16 font-medium">Add Arbitre</h5>
+      <button dismissModal [ModalDismiss]="'arbitreModal'" class="transition-all duration-200 ease-linear text-slate-400 hover:text-red-500">
+        <lucide-angular name="x" [class]="'size-5'"></lucide-angular>
+      </button>
+    </div>
+    <div class="max-h-[calc(theme('height.screen')_-_180px)] p-5 overflow-y-auto">
+      <form [formGroup]="equipeForm" class="grid grid-cols-1 xl:grid-cols-12 gap-x-5">
+        <div class="xl:col-span-12 grid gap-4 mb-3">
+          <div>
+            <label class="inline-block mb-2 text-base text-slate-800 font-medium">Nomequipe</label>
+            <input type="text" [class]="{'!border-red-500': equipeForm.get('nomequipe')?.invalid && equipeForm.get('nomequipe')?.touched}" class="input form-input w-full border-slate-200 focus:outline-none focus:border-custom-500" formControlName="nomequipe" placeholder="nomequipe" required>
+            <div *ngIf="equipeForm.get('nomequipe')?.invalid && (equipeForm.get('nomequipe')?.dirty || equipeForm.get('nomequipe')?.touched)" class="mt-1 text-sm text-red-500">
+              Please enter your nomequipe.
+            </div>
+          </div>
+          <div>
+            <label class="inline-block mb-2 text-base text-slate-800 font-medium">Pays</label>
+            <input type="text" [class]="{'!border-red-500': equipeForm.get('pays')?.invalid && equipeForm.get('pays')?.touched}" class="input form-input w-full border-slate-200 focus:outline-none focus:border-custom-500" formControlName="pays" placeholder="pays" required>
+            <div *ngIf="equipeForm.get('pays')?.invalid && (equipeForm.get('pays')?.dirty || equipeForm.get('pays')?.touched)" class="mt-1 text-sm text-red-500">
+              Please enter your pays.
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="border-t flex justify-end gap-2 p-5">
+      <button dismissModal [ModalDismiss]="'arbitreModal'" class="text-red-500 bg-white py-2 px-4 btn hover:text-red-500 hover:bg-red-100">Cancel</button>
+      <button (click)="onSubmit()" type="submit" class="text-white bg-custom-500 border-custom-500 hover:bg-custom-600 focus:bg-custom-600 py-2 px-4 btn">
+        {{ selectedEquipe ? 'Modifier' : 'Add' }}
+      </button>
+    </div>
+  </div>
+</ng-modals>
+<ng-modals id="deleteEquipe" [placement]="'modal-center'"     className="fixed flex flex-col transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4">
+  <div class="w-screen md:w-[28rem] bg-white shadow rounded-md">
+    <div class="h-full px-4 py-4">
+      <div class="float-right">
+        <button dismissModal [ModalDismiss]="'deleteEquipe'" class="transition-all duration-200 ease-linear text-slate-400 hover:text-red-500">
+          <lucide-angular name="x" [class]="'size-5'"></lucide-angular>
+        </button>
+      </div>
+      <img src="assets/images/delete.png" alt="" class="mt-5 block h-12 mx-auto">
+      <div class="mt-7 text-center">
+        <h5 class="mb-1 text-16 font-medium">Please Confirm</h5>
+        <p class="text-slate-500 px-4 font-medium">You have unsaved changes. Are you sure you want to continue without saving</p>
+        <div class="flex justify-center mb-3 gap-2 mt-6">
+          <button type="reset" dismissModal [ModalDismiss]="'deleteEquipe'"               class="transition-all duration-200 ease-linear bg-white border-white text-slate-500 btn hover:text-slate-600 focus:text-slate-600 active:text-slate-600 dark:bg-zink-500 dark:border-zink-500">Discard</button>
+          <button type="submit" (click)="deleteEquipe()"               class="text-white transition-all duration-200 ease-linear bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-red-400/20">Yes, Save It!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-modals>
+<!--end delete modal-->

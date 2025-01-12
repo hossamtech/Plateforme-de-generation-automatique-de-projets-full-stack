@@ -1,0 +1,149 @@
+<div class="col-span-12 md:order-8 2xl:col-span-9 card">
+	<div class="card-body">
+		<div class="grid items-center grid-cols-1 gap-3 mb-5 xl:grid-cols-12">
+			<div class="xl:col-span-3">
+				<h6 class="text-15">Employee Performance</h6>
+			</div><!--end col-->
+			<div class="xl:col-span-4 xl:col-start-10">
+				<div class="flex justify-end gap-3">
+					<button type="button" [appModalTrigger]="'arbitreModal'"
+							class="text-custom-500 btn bg-custom-100 hover:text-white hover:bg-custom-600 focus:text-white focus:bg-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:ring active:ring-custom-100">
+						{{ selectedArbitre ? 'Edit Arbitre' : 'Add Arbitre' }}
+					</button>
+				</div>
+			</div>
+
+		</div><!--end grid-->
+		<div class="-mx-5 overflow-x-auto">
+			<table class="w-full whitespace-nowrap">
+				<thead class="text-left bg-slate-100 text-slate-500">
+				<tr>
+
+					<th
+							class="text-left px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 ">ID</th>
+					<th
+							class=" text-left px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 ">Name</th>
+					<th
+							class=" text-left px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 ">Designation</th>
+
+					<th
+							class=" text-left px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200">Action</th>
+				</tr>
+				</thead>
+				<tbody>
+					@for(data of arbitreData();track $index){
+						<tr>
+
+							<td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200"><a
+									href="javascript:void(0);">{{data.idarbitre}}</a></td>
+
+							<td
+									class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 ">{{data.nom}}</td>
+							<td
+									class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 ">{{data.nationalite}}</td>
+
+							<td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 ">
+								<div class="flex gap-2">
+									<a [appModalTrigger]="'arbitreModal'" (click)="onEdit(data)"
+											class="flex items-center justify-center size-8 transition-all duration-200 ease-linear rounded-md bg-slate-100  text-slate-500 hover:text-custom-500  hover:bg-custom-100 ">
+										<lucide-angular name="pencil" [class]="'size-4'"></lucide-angular>
+									</a>
+									<a
+											class="flex items-center justify-center size-8 transition-all duration-200 ease-linear rounded-md bg-slate-100  text-slate-500 hover:text-red-500  hover:bg-red-100 "><lucide-angular name="trash-2" [class]="'size-4'"></lucide-angular></a>
+								</div>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+
+<ng-modals id="arbitreModal"  [placement]="'modal-center'"
+		className="fixed flex flex-col transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4">
+	<div class="w-[93vw] md:w-[32rem] bg-white shadow rounded-md">
+		<div class="flex items-center justify-between p-5 border-b">
+			<h5 class="text-16 font-medium">Add Arbitre</h5>
+			<button dismissModal [ModalDismiss]="'arbitreModal'"
+					class="transition-all duration-200 ease-linear text-slate-400 hover:text-red-500">
+				<lucide-angular name="x" [class]="'size-5'"></lucide-angular>
+			</button>
+		</div>
+		<div class="max-h-[calc(theme('height.screen')_-_180px)] p-5 overflow-y-auto">
+
+			<!-- Applying grid structure -->
+			<form [formGroup]="arbitreForm" class="grid grid-cols-1 xl:grid-cols-12 gap-x-5">
+				<div class="xl:col-span-12 grid gap-4 mb-3">
+					<div >
+						<label class="inline-block mb-2 text-base text-slate-800 font-medium">Nom</label>
+
+						<input type="text"
+								[class]="{'!border-red-500': arbitreForm.get('nom')?.invalid &&
+													arbitreForm.get('nom')?.touched}"
+								class="input form-input w-full border-slate-200  focus:outline-none focus:border-custom-500"
+								formControlName="nom" placeholder="nom" required>
+						<div
+								*ngIf="arbitreForm.get('nom')?.invalid && (arbitreForm.get('nom')?.dirty || arbitreForm.get('nom')?.touched)"
+								class="mt-1 text-sm text-red-500"
+						>
+							Please enter your nom.
+						</div>
+					</div>
+					<div>
+						<select class="form-select border-slate-200 focus:outline-none focus:border-custom-500">
+							<option selected>Open this select menu</option>
+							<option value="1">One</option>
+							<option value="2">Two</option>
+							<option value="3">Three</option>
+						</select>
+					</div>
+					<div>
+						<label class="inline-block mb-2 text-base text-slate-800 font-medium">Nationalite</label>
+						<input type="text"
+								[class]="{'!border-red-500': arbitreForm.get('nationalite')?.invalid &&
+													arbitreForm.get('nationalite')?.touched}"
+								class="input form-input w-full border-slate-200 focus:outline-none focus:border-custom-500"
+								formControlName="nationalite" placeholder="nationalite" required>
+						<div
+								*ngIf="arbitreForm.get('nationalite')?.invalid && (arbitreForm.get('nationalite')?.dirty || arbitreForm.get('nationalite')?.touched)"
+								class="mt-1 text-sm text-red-500"
+						>
+							Please enter your nationalite.
+						</div>
+
+						<input id="productDateInput" type="text" mwlFlatpickr
+								[flatpickrOptions]="{'altInput':true,'dateFormat':'m/d/Y', 'altFormat': 'd F, Y', 'locale':
+							French}"
+								formControlName="date"
+								class="pl-10 form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+								data-provider="flatpickr"
+								readonly="readonly"
+								>
+
+						<input id="productTimeInput" type="text" mwlFlatpickr
+								[flatpickrOptions]="{'noCalendar':true,'dateFormat':'H:i','time_24hr':false,'enableTime':true,'inline':true}"
+								formControlName="time"
+								class="pl-10 form-input border-slate-200 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 disabled:border-slate-300  disabled:text-slate-500  placeholder:text-slate-400 "
+								data-provider="timepickr" data-time-inline="11:42">
+					</div>
+				</div>
+
+
+			</form>
+
+		</div>
+
+		<div class="border-t flex justify-end gap-2 p-5">
+			<button dismissModal [ModalDismiss]="'arbitreModal'"
+					class="text-red-500 bg-white py-2 px-4 btn hover:text-red-500 hover:bg-red-100">Cancel</button>
+			<button (click)="onSubmit()" type="submit"
+					class="text-white bg-custom-500 border-custom-500 hover:bg-custom-600 focus:bg-custom-600 py-2 px-4 btn">
+				{{ selectedArbitre ? 'Modifier' : 'Add' }}
+
+			</button>
+
+		</div>
+	</div>
+</ng-modals>

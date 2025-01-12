@@ -1,0 +1,14 @@
+<div class="text-base bg-body-bg text-body font-public ">
+	<app-topbar></app-topbar>
+	<app-sidebar></app-sidebar>
+	<div class="relative min-h-screen ">
+		<div
+				class="md:ml-vertical-menu sm:ml-vertical-menu-sm pt-[calc(theme('spacing.header')_*_1.5)] pb-[calc(theme('spacing.header')_*_0.3)] px-4 ">
+			<div class="container-fluid group-data-[content=boxed]:max-w-boxed mx-auto">
+				<router-outlet></router-outlet>
+				<app-footer></app-footer>
+
+			</div>
+		</div>
+	</div>
+</div>

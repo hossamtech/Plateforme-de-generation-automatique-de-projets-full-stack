@@ -1,0 +1,26 @@
+<header id="page-topbar" (window:scroll)="windowScroll()"
+		class="md:left-vertical-menu fixed right-0 z-[1000] left-0 transition-all ease-linear duration-300">
+	<div class="layout-width">
+		<div
+				class="flex items-center px-4 mx-auto bg-topbar border-b-2 border-topbar shadow-md h-header shadow-slate-200/50">
+			<div class="flex items-center w-full">
+
+
+
+				<button type="button" (click)="changeSidebar()"
+						class="inline-flex relative justify-center items-center p-0 text-topbar-item transition-all size-[37.5px] duration-75 ease-linear bg-topbar rounded-md btn hover:bg-slate-100">
+					<lucide-angular name="chevrons-left" [class]="'w-5 h-5 sm:hidden'"></lucide-angular>
+				</button>
+
+				<div class="flex gap-3 ms-auto">
+					<div class="relative items-center hidden h-header md:flex">
+						<button data-tooltip="default" tooltip="hossamtech" [options]="myOptions" type="button"
+								class="inline-flex justify-center items-center p-0 text-topbar-item transition-all size-[37.5px] duration-200 ease-linear rounded-md btn bg-topbar-item-bg-hover hover:text-topbar-item-hover">
+							<lucide-angular name="github" class="inline-block size-5 fill-slate-100"></lucide-angular>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

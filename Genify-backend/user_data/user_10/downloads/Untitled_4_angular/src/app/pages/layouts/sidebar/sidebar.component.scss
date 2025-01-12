@@ -1,0 +1,13 @@
+/* Custom scrollbar width */
+.custom-scrollbar .simplebar-scrollbar {
+  width: 20px !important; /* Adjust the width as needed */
+}
+
+.custom-scrollbar .simplebar-scrollbar:before {
+  background-color: #000 !important; /* Adjust the scrollbar color */
+}
+
+.ltr\:\[\&\.dropdown-button\]\:before\:right-2.dropdown-button:where([dir="ltr"], [dir="ltr"] *)::before {
+  content: var(--tw-content) !important;
+  right: -0.5rem !important;
+}

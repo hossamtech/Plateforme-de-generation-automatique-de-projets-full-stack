@@ -1,0 +1,32 @@
+.styled-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #f8f9fa;
+    color: #4a4a4a;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+

@@ -1,0 +1,25 @@
+.navbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  padding: 8px 15px;
+  height: 35px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link.active {
+  background-color: #24a7e9;
+  color: white !important;
+}
+
+.nav-link:not(.active):hover {
+  color: #0056b3;
+  text-decoration: underline;
+}

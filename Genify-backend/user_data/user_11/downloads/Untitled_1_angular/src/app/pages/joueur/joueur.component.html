@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center styled-title">Gérer joueur</h2>
+  <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success d-flex align-items-center" (click)="openForm()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v6h6a.5.5 0 0 1 0 1h-6v6a.5.5 0 0 1-1 0v-6h-6a.5.5 0 0 1 0-1h6v-6A.5.5 0 0 1 8 1z"/>
+          </svg>
+          <span class="ms-2">Add joueur</span>
+      </button>
+  </div>
+  <div class="card shadow-sm rounded mb-4" *ngIf="!showForm">
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="bg-primary text-white">
+        <tr>
+          <th>Idjoueur</th>
+          <th>Nomjoueur</th>
+          <th>Poste</th>
+          <th>Equipe ID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of joueurList">
+          <td>{{ element.idJoueur }}</td>
+          <td>{{ element.nomJoueur }}</td>
+          <td>{{ element.poste }}</td>
+          <td>{{ element.equipeId }}</td>
+          <td>
+            <button class="btn btn-link btn-sm text-decoration-none" (click)="editjoueur(element)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deletejoueur(element.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="showForm" class="card mt-4 mx-auto shadow-sm rounded" style="max-width: 500px;">
+    <div class="card-header text-center">{{ editMode ? 'Edit' : 'Add' }} joueur</div>
+    <div class="card-body">
+      <form [formGroup]="joueurForm">
+        <div class="form-group mb-3">
+          <label>Idjoueur</label>
+          <input type="text" class="form-control" formControlName="idJoueur" required>
+        </div>
+        <div class="form-group mb-3">
+          <label>Nomjoueur</label>
+          <input type="text" class="form-control" formControlName="nomJoueur" required>
+        </div>
+        <div class="form-group mb-3">
+          <label>Poste</label>
+          <input type="text" class="form-control" formControlName="poste" required>
+        </div>
+        <div class="form-group mb-3">
+          <label>Select Equipe</label>
+          <select class="form-control" formControlName="equipeId">
+            <option *ngFor="let item of equipeList" [value]="item.id">{{ item.name }}</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary me-2" (click)="addOrUpdatejoueur()" [disabled]="joueurForm.invalid">
+            {{ editMode ? 'Update' : 'Add' }}
+          </button>
+          <button class="btn btn-secondary" (click)="closeForm()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
